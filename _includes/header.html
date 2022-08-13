@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Twitter cards -->
+  <meta name="twitter:card"  content="summary">
+  <meta name="twitter:title" content="{{ page.title }}">
+
+  {% if page.twitter %}
+  <meta name="twitter:description" content="{{ page.twitter }}">
+  {% elsif page.excerpt %}
+  <meta name="twitter:description" content="{{ page.excerpt | strip_html }}">
+  {% endif %}
+  <meta name="twitter:image" content="https://zeux.io/images/avatar.jpg">
+  <!-- end of Twitter cards -->
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    {{ site.name }} - {{ page.title }}
+  </title>
+
+  <!-- Disable favicon -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <!-- CSS -->
+  <style type="text/css">
+  @font-face {
+    font-family: 'PT Sans'; font-style: normal; font-weight: 400;
+    font-display: fallback;
+    src: local('PT Sans'), local('PTSans-Regular'), url(/fonts/pt_sans-web-regular-webfont.woff) format('woff');
+  }
+  @font-face {
+    font-family: 'PT Sans'; font-style: normal; font-weight: 700;
+    font-display: fallback;
+    src: local('PT Sans Bold'), local('PTSans-Bold'), url(/fonts/pt_sans-web-bold-webfont.woff) format('woff');
+  }
+  @font-face {
+    font-family: 'PT Sans'; font-style: italic; font-weight: 400;
+    font-display: fallback;
+    src: local('PT Sans Italic'), local('PTSans-Italic'), url(/fonts/pt_sans-web-italic-webfont.woff) format('woff');
+  }
+
+  {% include css/poole.css %}
+  {% include css/syntax.css %}
+  {% include css/hyde.css %}
+  </style>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed/">
+
+  {% if page.math %}
+  <!-- Katex -->
+  <link rel="stylesheet" href="/katex/katex.min.css">
+  <script type="text/javascript" src="/katex/katex.min.js"></script>
+  <script type="text/javascript" src="/katex/contrib/auto-render.min.js"></script>
+  {% endif %}
+</head>
+<body>
+<div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <p class="lead"><a href="/"><nobr>Bits, pixels, cycles and more</nobr></a></p>
+    </div>
+
+    {% if page.title == 'Home' %}
+    <div>
+    {% else %}
+    <div class="sidebar-mini">
+      Arseny Kapoulkine (<small><a href="mailto:arseny.kapoulkine@gmail.com">email</a>, <a href="https://twitter.com/zeuxcg">Twitter</a></small>)
+    </div>
+
+    <div class="sidebar-content">
+    {% endif %}
+      <h4>Author</h4>
+      <p>
+      Arseny Kapoulkine (<small><a href="mailto:arseny.kapoulkine@gmail.com">email</a>, <a href="https://twitter.com/zeuxcg">Twitter</a></small>)
+      </p>
+      <p>
+      <a href="/about/">Work, projects and publications</a>
+      </p>
+
+      <h4>Posts</h4>
+      <p>
+      If you like this blog, you should follow it <a href="/feed/">via RSS</a> and read <a href="/archives/">older posts</a>. Here are the recent posts:
+      </p>
+      <ul style="padding-left: 20px;">
+      {% for post in site.posts limit:10 %}
+        <li>
+          <small><a href="{{ post.url }}">{{ post.title }}</a></small>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="content container">
