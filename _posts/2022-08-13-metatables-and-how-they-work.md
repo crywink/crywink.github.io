@@ -1,9 +1,3 @@
----
-layout: post
-title: Metatables, and how they work.
-excerpt_separator: <!--more-->
----
-
 I\'m active in several development help communities and have noticed that one of the most common struggles amongst new scripters is metatables. While initially they can be an odd concept to wrap your head around, they are actually quite simple.
 
 ### Basics
@@ -52,11 +46,28 @@ We use `setmetatable` to cast our metatable onto a regular table. It\'s importan
 
 ```lua
 local tbl = {}
+
 setmetatable(tbl, {
-	__index = function(self, key)
-		print(key .. " doesn't exist!")
-	end
+  __index = function(self, key)
+    print(key .. " doesn't exist!")
+  end
 })
 
 print(tbl.foo) -- "foo doesn't exist!"
 ```
+
+#### getmetatable
+It should be understood that metamethods are not added as indices to our target table. We cannot simply query `tbl.__index` and expect to find the underlying metamethod. Instead, we use `getmetatable`. The syntax here is fairly straight-forward, so I'll just go ahead and show you some example code...
+```lua
+local tbl = {}
+
+setmetatable(tbl, {
+  __index = function(self, key)
+    return "non-existent"
+  end
+})
+
+print(tbl.__index) -- non-existent
+print(getmetatable(tbl).__index) -- oh look! it's our function!
+```
+
